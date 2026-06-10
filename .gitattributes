@@ -1,0 +1,7 @@
+# Normalize line endings to LF on commit, regardless of contributor OS.
+# Keeps SKILL.md / scripts byte-stable across Windows/macOS/Ubuntu so the
+# install is identical everywhere. (BOM-free + LF is what Codex needs.)
+* text=auto eol=lf
+*.mjs text eol=lf
+*.md text eol=lf
+*.json text eol=lf
