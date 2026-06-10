@@ -54,7 +54,13 @@ function die(msg) {
 function parseBitbucketRemote() {
   let url;
   try {
-    url = execFileSync('git', ['remote', 'get-url', 'origin'], { encoding: 'utf8' }).trim();
+    // stdio: silence git's stderr — "not a git repository" is an expected,
+    // recoverable miss here (we fall through to the error message), not noise
+    // the user should see.
+    url = execFileSync('git', ['remote', 'get-url', 'origin'], {
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore'],
+    }).trim();
   } catch {
     return null;
   }
@@ -203,6 +209,7 @@ async function resolvePrFromBranch(headers, apiBase) {
   try {
     branch = execFileSync('git', ['rev-parse', '--abbrev-ref', 'HEAD'], {
       encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore'], // silence git's stderr; we give our own message
     }).trim();
   } catch {
     die('Not in a git repo or git unavailable. Pass --pr explicitly.');
