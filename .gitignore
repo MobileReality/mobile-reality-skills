@@ -4,5 +4,8 @@ node_modules/
 *.log
 .DS_Store
 
+# local-only agent workspace (plans, settings) — not for distribution
+.claude/
+
 # local-only reference copies (do not distribute; remove once port is done — Faza 6)
 _source/
