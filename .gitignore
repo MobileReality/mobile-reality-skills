@@ -1,0 +1,8 @@
+node_modules/
+.env
+.env.*
+*.log
+.DS_Store
+
+# local-only reference copies (do not distribute; remove once port is done — Faza 6)
+_source/
